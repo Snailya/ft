@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  api-gateway:
+    platform: linux
+    build:
+      context: .
+      dockerfile: ./apps/api-gateway/Dockerfile
+      target: development
+    command: npm run start:dev api-gateway
+    env_file:
+      - ./apps/api-gateway/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+
+  service-data:
+    platform: linux
+    build:
+      context: .
+      dockerfile: ./apps/service-data/Dockerfile
+      target: development
+    command: npm run start:dev service-data
+    env_file:
+      - ./apps/service-data/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3001:3001'
+
+  # service-convertor:
+  #   platform: windows
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/service-convertor/Dockerfile
+  #     target: development
+  #   command: npm run start:dev service-convertor
+  #   env_file:
+  #     - ./apps/service-convertor/.env
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   ports:
+  #     - '3002:3002'
