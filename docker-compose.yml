@@ -1,8 +1,13 @@
 version: "3"
 
 services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+        
   api-gateway:
-    platform: linux
     build:
       context: .
       dockerfile: ./apps/api-gateway/Dockerfile
@@ -13,11 +18,12 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    depends_on:
+      - rabbitmq
     ports:
       - '3000:3000'
 
   service-data:
-    platform: linux
     build:
       context: .
       dockerfile: ./apps/service-data/Dockerfile
@@ -28,20 +34,3 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    ports:
-      - '3001:3001'
-
-  # service-convertor:
-  #   platform: windows
-  #   build:
-  #     context: .
-  #     dockerfile: ./apps/service-convertor/Dockerfile
-  #     target: development
-  #   command: npm run start:dev service-convertor
-  #   env_file:
-  #     - ./apps/service-convertor/.env
-  #   volumes:
-  #     - .:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   ports:
-  #     - '3002:3002'

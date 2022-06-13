@@ -29,15 +29,6 @@
       "compilerOptions": {
         "tsConfigPath": "apps/service-data/tsconfig.app.json"
       }
-    },
-    "service-convertor": {
-      "type": "application",
-      "root": "apps/service-convertor",
-      "entryFile": "main",
-      "sourceRoot": "apps/service-convertor/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/service-convertor/tsconfig.app.json"
-      }
     }
   },
   "compilerOptions": {

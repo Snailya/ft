@@ -1,0 +1,2 @@
+export const CONVERTING_SERVICE = 'CONVERTING';
+export const DATA_SERVICE = 'DATA';

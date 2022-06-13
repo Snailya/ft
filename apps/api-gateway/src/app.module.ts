@@ -1,28 +1,15 @@
+import { DATA_SERVICE, RmqModule } from '@ft/common';
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
   imports: [
-    ClientsModule.register([
-      {
-        name: 'SERVICE_DATA',
-        transport: Transport.TCP,
-        options: {
-          host: 'service-data',
-          port: 3001,
-        },
-      },
-      {
-        name: 'SERVICE_CONVERTOR',
-        transport: Transport.TCP,
-        options: {
-          host: 'service-convertor',
-          port: 3002,
-        },
-      },
-    ]),
+    ConfigModule.forRoot({isGlobal: true}),
+    RmqModule.register({
+      name: DATA_SERVICE,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,6 +7,7 @@ import { TransformInterceptor } from './interceptors/transform.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Set up Swagger Api
   const config = new DocumentBuilder()
     .setTitle('API-GATEWAY')
     .setVersion('1.0')
